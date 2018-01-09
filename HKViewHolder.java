@@ -18,7 +18,7 @@ public class HKViewHolder extends RecyclerView.ViewHolder {
         createClickListeners(view, viewHolderClickListener, clickableChilds, clickable);
     }
 
-    private void createClickListeners(View view, AXViewHolderClickListener viewHolderClickListener, int[] clickableChilds, Clickables clickable) {
+    private void createClickListeners(View view, HKViewHolderClickListener viewHolderClickListener, int[] clickableChilds, Clickables clickable) {
         switch (clickable) {
             case ALL:
                 setClickListenerToViewHolder(view, viewHolderClickListener);
