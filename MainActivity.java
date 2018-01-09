@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements HKBaseRecyclerAda
         TestAdapter adapter = new TestAdapter();
         adapter.setItems(items);
         HKBaseRecyclerAdapter.OnRowClickListener onRowClickListener = this;
-        adapter.setOnRowClickListener(onRowClickListener, HKViewHolder.Clickables.ONLY_ROOT);
+        adapter.setOnRowClickListener(onRowClickListener);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
     }
