@@ -10,18 +10,28 @@ public class HKViewHolder extends RecyclerView.ViewHolder {
         void onViewHolderClick(View view, int position, boolean isChildView);
     }
 
-    private HKViewHolder(View view, HKViewHolderClickListener viewHolderClickListener, int[] childViewsToInflate, int[] clickableChilds, Clickables clickables) {
+    private HKViewHolder(View view, HKViewHolderClickListener viewHolderClickListener, int[] childViewsToInflate, int[] clickableChilds, Clickables clickable) {
         super(view);
         views = new SparseArray<>();
         views.put(0, view);
         initViewList(childViewsToInflate);
-        if (Clickables.ALL == clickables) {
-            setClickListenerToViewHolder(viewHolderClickListener, view);
-            setClickListenerToChilds(clickableChilds, viewHolderClickListener);
-        } else if (Clickables.ONLY_ROOT == clickables) {
-            setClickListenerToViewHolder(viewHolderClickListener, view);
-        } else if (Clickables.ONLY_CHILDS == clickables) {
-            setClickListenerToChilds(clickableChilds, viewHolderClickListener);
+        createClickListeners(view, viewHolderClickListener, clickableChilds, clickable);
+    }
+
+    private void createClickListeners(View view, AXViewHolderClickListener viewHolderClickListener, int[] clickableChilds, Clickables clickable) {
+        switch (clickable) {
+            case ALL:
+                setClickListenerToViewHolder(view, viewHolderClickListener);
+                setClickListenerToChilds(clickableChilds, viewHolderClickListener);
+                break;
+            case ONLY_CHILDS:
+                setClickListenerToChilds(clickableChilds, viewHolderClickListener);
+                break;
+            case ONLY_ROOT:
+                setClickListenerToViewHolder(view, viewHolderClickListener);
+                break;
+            default:
+                break;
         }
     }
 
@@ -29,7 +39,7 @@ public class HKViewHolder extends RecyclerView.ViewHolder {
         return new HKViewHolder(view, viewHolderClickListener, childViewsToInflate, clickableChilds, clickables);
     }
 
-    private void setClickListenerToViewHolder(final HKViewHolderClickListener viewHolderClickListener, View view) {
+    private void setClickListenerToViewHolder(View view, final HKViewHolderClickListener viewHolderClickListener) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
