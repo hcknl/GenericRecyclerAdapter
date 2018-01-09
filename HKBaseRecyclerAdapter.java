@@ -50,8 +50,14 @@ public abstract class HKBaseRecyclerAdapter<T> extends RecyclerView.Adapter<HKVi
     }
 
     public void setItems(List<T> items) {
+        setItems(items,false);
+    }
+    public void setItems(List<T> items,boolean autoRefresh) {
         if (items != null) {
             this.items = items;
+            if (autoRefresh){
+                notifyDataSetChanged();
+            }
         }
     }
     public void setOnRowClickListener(OnRowClickListener onRowClickListener) {
