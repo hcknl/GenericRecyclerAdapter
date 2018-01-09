@@ -54,13 +54,11 @@ public abstract class HKBaseRecyclerAdapter<T> extends RecyclerView.Adapter<HKVi
             this.items = items;
         }
     }
-
-    public void setOnRowClickListener(OnRowClickListener onRowClickListener, HKViewHolder.Clickables clickables) {
+    public void setOnRowClickListener(OnRowClickListener onRowClickListener) {
         this.onRowClickListener = onRowClickListener;
-        this.clickables = clickables;
     }
 
-    public void setOnRowClickListener(OnRowClickListener onRowClickListener) {
-        setOnRowClickListener(onRowClickListener, HKViewHolder.Clickables.NONE);
+    public void setClickableType(HKViewHolder.Clickables clickables) {
+        this.clickables = clickables;
     }
 }
